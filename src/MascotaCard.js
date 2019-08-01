@@ -18,9 +18,27 @@ class MascotaCard extends Component {
         //init de on Edit
         this.onEdit = this.onEdit.bind(this); 
         // la verdad es que tengo algunas dudas de este bind
+        this.onSubmitEdit = this.onSubmitEdit.bind(this);
     }
+
+    //handle methonds de la card
     onEdit(){
         this.setState({isEdit:true});
+    }
+    onSubmitEdit(event){
+        event.preventDefault();
+
+        this.props.onSubmitEdit(
+            this.nameInputsub.value,
+            this.imgInputsub.value,
+            this.costInputsub.value,
+            this.especieInputsub.value,
+            this.edadInputsub.value,
+            this.descripInputsub.value,
+            this.fechaInputsub.value
+        );
+
+        this.setState({isEdit : false});
     }
     //método onDelete 
     onDelete(){
@@ -29,6 +47,7 @@ class MascotaCard extends Component {
         onDelete(id);
     }
 
+    //termina handle methonds 
     render(){
         const {id,name,especie,
             edad,img, cost, descrip, fecha} = this.props;
@@ -40,31 +59,38 @@ class MascotaCard extends Component {
                     ? ( 
                               <div>
                               
-                              <form onSubmit={this.onSubmit}>
-                              <input type="text" placeholder="name" 
-                              ref={nameInput => this.nameInput = nameInput} />
+                              <form onSubmit={this.onSubmitEdit}>
+                              <input type="hidden" placeholder="name" 
+                              ref={nameInputsub => this.nameInputsub = nameInputsub} 
+                              defaultValue={name}/>
           
                               <input placeholder="especie" 
-                              ref={especieInput => this.especieInput = especieInput} />
+                              ref={especieInputsub => this.especieInputsub = especieInputsub}
+                              defaultValue={especie} />
           
                               <input type="url" placeholder="urlimagen"
-                              ref={imgInput => this.imgInput =imgInput} />
+                              ref={imgInputsub => this.imgInputsub =imgInputsub}
+                              defaultValue={img} />
           
                               <input type="number" placeholder="costo" 
-                              ref={costInput => this.costInput =costInput} />
+                              ref={costInputsub => this.costInputsub =costInputsub}
+                              defaultValue={cost} />
           
                               <input type="number" placeholder="edad" 
-                              ref={edadInput => this.edadInput =edadInput} />
+                              defaultValue={edad}
+                              ref={edadInputsub => this.edadInputsub =edadInputsub} />
           
                               
                               <input type="date" placeholder="fecha" 
-                              ref={fechaInput => this.fechaInput =fechaInput} />
+                              defaultValue={fecha}
+                              ref={fechaInputsub => this.fechaInputsub =fechaInputsub} />
                               <br></br>
                               <textarea placeholder="descripción"
-                              ref={descripInput => this.descripInput = descripInput}></textarea>
+                              defaultValue={descrip}
+                              ref={descripInputsub => this.descripInputsub = descripInputsub}></textarea>
                               <br></br>
           
-                              <button>Añadir</button>
+                              <button>Editar</button>
                           </form>
                               </div>
                     ) : (

@@ -56,6 +56,8 @@ constructor(props){
   this.onDelete = this.onDelete.bind(this);
   // binding de delete
   this.onAdd = this.onAdd.bind(this);
+  this.onSubmitEdit = this.onSubmitEdit.bind(this);
+
 }
 
 //método previo a carga
@@ -95,8 +97,25 @@ constructor(props){
 
     this.setState({mascotas:filtermasc}); 
   }
-  onEdit(){
+  onSubmitEdit(name,img,cost,especie,edad,descrip,date)//creo que podía meter todo esto es un solo objeto y se verìa màs limpio pero en fin
+  {
+    //console.log(name,img,cost,especie,edad,descrip,date)
+    let mascotas = this.getMascotas();
     
+    mascotas = mascotas.map(mascota => {
+      if(mascota.name === name){
+          mascota.img = img;
+          mascota.cost = cost;
+          mascota.especie = especie;
+          mascota.edad = edad;
+          mascota.descrip = descrip;
+          mascota.date = date;
+      }
+
+      return mascota;
+    });
+
+    this.setState({mascotas}); 
   }
 
   //termina Cruds
@@ -124,6 +143,7 @@ constructor(props){
                         name={mascota.name}
                         {...mascota}
                         onDelete={this.onDelete}
+                        onSubmitEdit={this.onSubmitEdit}
                         >
                         
                         </MascotaCard>
