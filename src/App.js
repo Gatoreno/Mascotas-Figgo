@@ -1,9 +1,10 @@
 import React,{Component} from 'react';
 import './App.css';
 import MascotaCard from './MascotaCard'
+import AddMascota from './AddMascota'
 
 //base de datos súper local XD
-const mascotas =[
+const mascotas =[ 
   {
     id:1,
     name:'Charal',
@@ -12,6 +13,26 @@ const mascotas =[
     img: 'https://static.inaturalist.org/photos/6286535/medium.jpeg?1487134259',
     cost: 1,
     descrip: 'charal de agua dulce',
+    fecha: '11/05/2019'
+  },
+  {
+    id:2,
+    name:'Cachalote',
+    especie: 'mamifero',
+    edad: 1,
+    img: 'https://static.emol.cl/emol50/Fotos/2016/04/22/file_20160422070449.jpg',
+    cost: 950000,
+    descrip: 'ceteceo de agua salada',
+    fecha: '11/05/2019'
+  },
+  {
+    id:23,
+    name:'Azul',
+    especie: 'mamifero',
+    edad: 1,
+    img: 'https://s03.s3c.es/imag/_v0/580x300/d/d/a/ballena-azul-efe.jpg',
+    cost: 3000000,
+    descrip: 'ceteceo de agua salada',
     fecha: '11/05/2019'
   }
 
@@ -27,33 +48,44 @@ class App extends Component {
 
 constructor(props){
   super(props);
+  //Iniciar estado con la lista de mascotas
   this.state = {
-    mascotas: []
+    mascotas:JSON.parse (localStorage.getItem('mascotas'))
   };
-
+// binding de delete
   this.onDelete = this.onDelete.bind(this);
 }
 
 //método previo a carga
   componentWillMount(){
-   this.getMascotas();
+   const mascotas =  this.getMascotas();
+   this.setState({mascotas});// set estado con lista de mascotas
   }
 
 
   //CRuds
-  //obtener mascotas static db
+  //obtener mascotas lista de mascotas
   getMascotas(){
-    const mascotas = JSON.parse (localStorage.getItem('mascotas'));
-
-    this.setState({mascotas});
+    return this.state.mascotas
   }
-  
+  onAdd(){
+
+  }
   onDelete(id){
 
-    alert(id);
+    const mascotas = this.getMascotas();
+    const filtermasc = mascotas.filter(mascota => {
+      return mascota.id !== id;
+
+    });
+    console.log(filtermasc)
+
+    this.setState({mascotas:filtermasc}); 
   }
 
   //termina Cruds
+
+
   //render u.u_-
     render(){
       return (
