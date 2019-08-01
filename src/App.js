@@ -54,6 +54,8 @@ constructor(props){
   };
 // binding de delete
   this.onDelete = this.onDelete.bind(this);
+  // binding de delete
+  this.onAdd = this.onAdd.bind(this);
 }
 
 //método previo a carga
@@ -63,12 +65,23 @@ constructor(props){
   }
 
 
-  //CRuds
+  //Cruds
   //obtener mascotas lista de mascotas
   getMascotas(){
     return this.state.mascotas
   }
-  onAdd(){
+  onAdd(name,img,cost,especie,edad,descrip,date){
+   
+    //id imaginario
+    const id =  Math.floor(Math.random() * 1000000);
+
+    //console.log(id,name,img,cost,especie,edad,descrip,date);
+    // obtener lista de db
+    const mascotas = this.getMascotas();
+    //empujar nuevo mascota
+    mascotas.push({id,name,img,cost,especie,edad,descrip,date});
+    //set estado actual de lista de mascotas
+    this.setState({mascotas});
 
   }
   onDelete(id){
@@ -82,6 +95,9 @@ constructor(props){
 
     this.setState({mascotas:filtermasc}); 
   }
+  onEdit(){
+    
+  }
 
   //termina Cruds
 
@@ -89,10 +105,18 @@ constructor(props){
   //render u.u_-
     render(){
       return (
+       
         <div className="App">
-        <h1>
-            Mascotas de Figgo
-        </h1>
+
+       
+        <img src="https://www.figgoapp.com/img/figgo-logo.png" width="200px"></img><br></br>
+        <h3>
+        Mascotas 
+    </h3>
+        
+        <AddMascota
+          onAdd={this.onAdd}
+        />
               {
                 this.state.mascotas.map(mascota => {
                     return(
