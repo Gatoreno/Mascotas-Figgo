@@ -1,7 +1,9 @@
-import React,{Component} from 'react';
-import './App.css';
+import React, {Component} from 'react';
 import MascotaCard from './MascotaCard'
 import AddMascota from './AddMascota'
+import AppBar from '@material-ui/core/AppBar'
+
+import './App.css';
 
 //base de datos súper local XD
 const mascotas =[ 
@@ -126,9 +128,11 @@ constructor(props){
       return (
        
         <div className="App">
+        <AppBar color="primary" position="static">
+        <img src="https://www.figgoapp.com/img/figgo-logo.png" width="100px"></img><br></br>
 
+      </AppBar>
        
-        <img src="https://www.figgoapp.com/img/figgo-logo.png" width="200px"></img><br></br>
         <h3>
         Mascotas 
     </h3>

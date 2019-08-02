@@ -1,4 +1,6 @@
 import React,{Component} from 'react';
+import Button from '@material-ui/core/Button';
+
 import './App.css';
 
 
@@ -107,12 +109,12 @@ class MascotaCard extends Component {
                         
                         
                         <div>
-                            <button onClick={this.onDelete} >
+                            <Button variant="contained" color="secondary" onClick={this.onDelete} >
                                 Borrar
-                            </button>
-                            <button onClick={this.onEdit} >
+                            </Button>
+                            <Button variant="contained" color="primary" onClick={this.onEdit} >
                             Editar
-                        </button>
+                        </Button>
                         </div>
                         </div>
                     )
